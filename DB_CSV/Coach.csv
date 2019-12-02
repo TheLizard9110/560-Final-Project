@@ -2,7 +2,7 @@ CoachId,TeamId,Name,Job,Experience
 1,19,Adam Gase,HC,3.5625
 2,16,Andy Reid,HC,20.625
 3,17,Anthony Lynn,HC,2.6875
-4,22,Bill Belichick,HC,24.5625
+4,21,Bill Belichick,HC,24.5625
 5,13,Bill O'Brien,HC,5.5625
 6,2,Dan Quinn,HC,4.5625
 7,30,Dirk Koetter,HC,3
@@ -16,7 +16,7 @@ CoachId,TeamId,Name,Job,Experience
 15,12,Joe Philbin,HC,3.5
 16,3,John Harbaugh,HC,11.5625
 17,25,Jon Gruden,HC,12.5625
-18,29,Kyle Shanahan,HC,2.5625
+18,28,Kyle Shanahan,HC,2.5625
 19,7,Marvin Lewis,HC,16
 20,6,Matt Nagy,HC,1.5625
 21,11,Matt Patricia,HC,1.5625
@@ -25,11 +25,11 @@ CoachId,TeamId,Name,Job,Experience
 24,31,Mike Vrabel,HC,1.625
 25,20,Mike Zimmer,HC,5.625
 26,23,Pat Shurmur,HC,3.6875
-27,28,Pete Carroll,HC,13.625
+27,29,Pete Carroll,HC,13.625
 28,5,Ron Rivera,HC,8.5625
 29,4,Sean McDermott,HC,2.5625
 30,18,Sean McVay,HC,2.5625
-31,21,Sean Payton,HC,12.5625
+31,22,Sean Payton,HC,12.5625
 32,1,Steve Wilks,HC,1
 33,24,Todd Bowles,HC,4.1875
 34,10,Vance Joseph,HC,2
