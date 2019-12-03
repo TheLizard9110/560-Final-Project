@@ -218,7 +218,7 @@ namespace NFLDatabaseUi
                     int tackles;
                     int Points;
                     int Interceptions;
-                    int PositionalUnit;
+                    string PositionalUnit;
                     int PassingYards;
                     int RushingYards;
                     int RecievingYards;
@@ -228,16 +228,16 @@ namespace NFLDatabaseUi
                     int.TryParse(textBox4.Text, out tackles);
                     int.TryParse(textBox5.Text, out Points);
                     int.TryParse(textBox6.Text, out Interceptions);
-                    int.TryParse(textBox7.Text, out PositionalUnit);
+                    PositionalUnit = textBox7.Text;
                     int.TryParse(textBox8.Text, out PassingYards);
                     int.TryParse(textBox9.Text, out RushingYards);
                     int.TryParse(textBox10.Text, out RecievingYards);
-                    int.TryParse(textBox3.Text, out Sacks);
+                    int.TryParse(textBox11.Text, out Sacks);
                     if (checkBox1.Checked == true)
                         playProBowl = 1;
                     else
                         playProBowl = 0;
-                    insert = ($"INSERT dbo.Players(PlayerId,TeamId, Touchdowns, Tackles, Points, Interceptions, Name, PositionalUnit,PassingYards,RushingYards,RecievingYards,Sacks,PlayedinProBowl)VALUES((SELECT MAX(p.PlayerId) FROM dbo.Players p) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {TeamName} = t.Name),{touchdowns},{tackles},{Points},{Interceptions},'{Name}',{PositionalUnit},{PassingYards},{RushingYards},{Sacks},{playProBowl})");
+                    insert = ($"INSERT dbo.Players(PlayerId,TeamId, Touchdowns, Tackles, Points, Interceptions, Name, PositionalUnit,PassingYards,RushingYards,RecievingYards,Sacks,PlayedinProBowl)VALUES((SELECT MAX(p.PlayerId) FROM dbo.Players p) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE '{TeamName}' = t.Name),{touchdowns},{tackles},{Points},{Interceptions},'{Name}','{PositionalUnit}',{PassingYards},{RushingYards},{RecievingYards},{Sacks},{playProBowl})");
                     break;
                 case 2:
                     string _name = textBox1.Text;
@@ -246,14 +246,14 @@ namespace NFLDatabaseUi
                     if (position != "GM" && position != "Owner" && position != "Owner/GM")
                         MessageBox.Show("Invalid position for front office member.");
                     else
-                        insert = ($"INSERT dbo.FrontOffice(TeamId,MemberId,Name,Job)VALUES((SELECT t.TeamId FROM dbo.Team t WHERE {_TeamName_} = t.Name),(SELECT MAX(f.MemberId) FROM dbo.FrontOffice f) + 1,'{_name}','{position}')");
+                        insert = ($"INSERT dbo.FrontOffice(TeamId,MemberId,Name,Job)VALUES((SELECT t.TeamId FROM dbo.Team t WHERE '{_TeamName_}' = t.Name),(SELECT MAX(f.MemberId) FROM dbo.FrontOffice f) + 1,'{_name}','{position}')");
 
                     break;
                 case 3:
                     string namer = textBox1.Text;
                     string teamer = comboBox2.SelectedItem.ToString();
                     int.TryParse(textBox3.Text, out int exp);
-                    insert = ($"INSERT dbo.Coach(CoachId,TeamId,Name,Job,Experience)VALUES((SELECT MAX(c.CoachId) FROM dbo.Coach c) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {teamer} = t.Name),'{namer}','HC','{exp}')");
+                    insert = ($"INSERT dbo.Coach(CoachId,TeamId,Name,Job,Experience)VALUES((SELECT MAX(c.CoachId) FROM dbo.Coach c) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE '{teamer}' = t.Name),'{namer}','HC','{exp}')");
                     break;
             }
             
