@@ -39,29 +39,46 @@
             // param1ComboBox
             // 
             this.param1ComboBox.FormattingEnabled = true;
-            this.param1ComboBox.Location = new System.Drawing.Point(160, 44);
+            this.param1ComboBox.Location = new System.Drawing.Point(560, 44);
             this.param1ComboBox.Name = "param1ComboBox";
-            this.param1ComboBox.Size = new System.Drawing.Size(145, 24);
+            this.param1ComboBox.Size = new System.Drawing.Size(186, 24);
             this.param1ComboBox.TabIndex = 0;
             this.param1ComboBox.Text = "First Parameter";
+            this.param1ComboBox.Visible = false;
+            this.param1ComboBox.SelectedIndexChanged += new System.EventHandler(this.param1ComboBox_SelectedIndexChanged);
             // 
             // queryType
             // 
             this.queryType.FormattingEnabled = true;
+            this.queryType.Items.AddRange(new object[] {
+            "Players with over 500 rushing yards",
+            "Players, Coaches, and Front Office members of a Team",
+            "Ranking of Teams by Wins",
+            "Ranking of Coaches by Experience",
+            "Non-Quarterback Players with more than 15 touchdowns",
+            "All Players on a given Team",
+            "All Games in which a Team scored over 40 points",
+            "All Games of a given Team",
+            "All Games in which the Home Team rushed over 200 yards",
+            "All Team Owners and GMs",
+            "All Coaches with less than 2 years of Experience",
+            "All Cornerbacks, ordered by number of interceptions"});
             this.queryType.Location = new System.Drawing.Point(33, 44);
             this.queryType.Name = "queryType";
-            this.queryType.Size = new System.Drawing.Size(121, 24);
+            this.queryType.Size = new System.Drawing.Size(470, 24);
             this.queryType.TabIndex = 1;
             this.queryType.Text = "Select Query";
+            this.queryType.SelectedIndexChanged += new System.EventHandler(this.queryType_SelectedIndexChanged);
             // 
             // queryButton
             // 
-            this.queryButton.Location = new System.Drawing.Point(176, 114);
+            this.queryButton.Location = new System.Drawing.Point(809, 39);
             this.queryButton.Name = "queryButton";
-            this.queryButton.Size = new System.Drawing.Size(119, 32);
+            this.queryButton.Size = new System.Drawing.Size(151, 45);
             this.queryButton.TabIndex = 2;
             this.queryButton.Text = "Find Information";
             this.queryButton.UseVisualStyleBackColor = true;
+            this.queryButton.Click += new System.EventHandler(this.queryButton_Click);
             // 
             // dataGridView1
             // 
@@ -75,11 +92,12 @@
             // param2ComboBox
             // 
             this.param2ComboBox.FormattingEnabled = true;
-            this.param2ComboBox.Location = new System.Drawing.Point(311, 44);
+            this.param2ComboBox.Location = new System.Drawing.Point(560, 114);
             this.param2ComboBox.Name = "param2ComboBox";
-            this.param2ComboBox.Size = new System.Drawing.Size(145, 24);
+            this.param2ComboBox.Size = new System.Drawing.Size(186, 24);
             this.param2ComboBox.TabIndex = 4;
             this.param2ComboBox.Text = "Second Parameter";
+            this.param2ComboBox.Visible = false;
             // 
             // Form1
             // 
