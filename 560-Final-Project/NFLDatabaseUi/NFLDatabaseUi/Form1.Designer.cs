@@ -43,7 +43,7 @@
             // param1ComboBox
             // 
             this.param1ComboBox.FormattingEnabled = true;
-            this.param1ComboBox.Location = new System.Drawing.Point(840, 69);
+            this.param1ComboBox.Location = new System.Drawing.Point(872, 69);
             this.param1ComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.param1ComboBox.Name = "param1ComboBox";
             this.param1ComboBox.Size = new System.Drawing.Size(277, 33);
@@ -70,7 +70,7 @@
             this.queryType.Location = new System.Drawing.Point(50, 69);
             this.queryType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.queryType.Name = "queryType";
-            this.queryType.Size = new System.Drawing.Size(703, 33);
+            this.queryType.Size = new System.Drawing.Size(751, 33);
             this.queryType.TabIndex = 1;
             this.queryType.Text = "Select Query";
             this.queryType.SelectedIndexChanged += new System.EventHandler(this.queryType_SelectedIndexChanged);
@@ -129,7 +129,7 @@
             "Receiving Yards",
             "Sacks",
             "Pro Bowl Selected"});
-            this.ComboBoxOrder.Location = new System.Drawing.Point(840, 176);
+            this.ComboBoxOrder.Location = new System.Drawing.Point(872, 176);
             this.ComboBoxOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ComboBoxOrder.Name = "ComboBoxOrder";
             this.ComboBoxOrder.Size = new System.Drawing.Size(277, 33);
