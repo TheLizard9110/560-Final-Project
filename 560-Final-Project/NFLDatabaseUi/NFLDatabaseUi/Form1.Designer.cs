@@ -34,6 +34,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBoxYards = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ComboBoxOrder = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,11 +113,34 @@
             this.label1.Text = "label1";
             this.label1.Visible = false;
             // 
+            // ComboBoxOrder
+            // 
+            this.ComboBoxOrder.FormattingEnabled = true;
+            this.ComboBoxOrder.Items.AddRange(new object[] {
+            "Name",
+            "Position",
+            "Touchdowns",
+            "Tackles",
+            "Interceptions",
+            "Passing Yards",
+            "Rushing Yards",
+            "Receiving Yards",
+            "Sacks",
+            "Pro Bowl Selected"});
+            this.ComboBoxOrder.Location = new System.Drawing.Point(840, 176);
+            this.ComboBoxOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ComboBoxOrder.Name = "ComboBoxOrder";
+            this.ComboBoxOrder.Size = new System.Drawing.Size(277, 33);
+            this.ComboBoxOrder.TabIndex = 7;
+            this.ComboBoxOrder.Text = "Order By";
+            this.ComboBoxOrder.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1572, 855);
+            this.Controls.Add(this.ComboBoxOrder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxYards);
             this.Controls.Add(this.dataGridView1);
@@ -140,6 +164,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBoxYards;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox ComboBoxOrder;
     }
 }
 

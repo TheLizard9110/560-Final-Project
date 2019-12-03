@@ -35,8 +35,56 @@ namespace NFLDatabaseUi
 
         private void queryButton_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
             int teamid = param1ComboBox.SelectedIndex + 1;
             string position = param1ComboBox.Text;
+            string orderby = "";
+            string q5ColOrder = "";
+            string ascORdesc = "DESC";
+            switch (ComboBoxOrder.SelectedItem)
+            {
+                case "Position":
+                    orderby = "PositionalUnit";
+                    q5ColOrder = "p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Touchdowns":
+                    orderby = "Touchdowns";
+                    q5ColOrder = "p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Tackles":
+                    orderby = "Tackles";
+                    q5ColOrder = "p.Tackles, p.Touchdowns, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Interceptions":
+                    orderby = "Interceptions";
+                    q5ColOrder = "p.Interceptions, p.Touchdowns, p.Tackles, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Passing Yards":
+                    orderby = "Passingyards";
+                    q5ColOrder = "p.Passingyards, p.Touchdowns, p.Tackles, p.Interceptions, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Rushing Yards":
+                    orderby = "RushingYards";
+                    q5ColOrder = "p.RushingYards, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Receiving Yards":
+                    orderby = "RecievingYards";
+                    q5ColOrder = "p.RecievingYards, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+                case "Sacks":
+                    orderby = "Sacks";
+                    q5ColOrder = "p.Sacks, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.PlayedInProBowl";
+                    break;
+                case "Pro Bowl Selected":
+                    orderby = "PlayedInProBowl";
+                    q5ColOrder = "p.PlayedInProBowl, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks";
+                    break;
+                default:
+                    orderby = "Name";
+                    ascORdesc = "ASC";
+                    q5ColOrder = "p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl";
+                    break;
+            }
             int yards = 0;
             int.TryParse(textBoxYards.Text, out yards);
             switch (queryType.SelectedIndex)
@@ -57,7 +105,7 @@ namespace NFLDatabaseUi
                     populateTable($"DECLARE @touchdown INT = {yards} DECLARE @position NVARCHAR(4) = N'{position}' SELECT p.Name, p.PositionalUnit, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl FROM dbo.Players p WHERE p.Touchdowns > @touchdown AND p.PositionalUnit = @position");// this is an alternate query SELECT * FROM dbo.Players p WHERE p.Touchdowns > @touchdown");
                     break;
                 case 5:
-                    populateTable($"DECLARE @teamid INT = {teamid} SELECT p.Name, p.PositionalUnit, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl FROM dbo.Players p WHERE p.TeamId = @teamid");
+                    populateTable($"DECLARE @teamid INT = {teamid} SELECT p.Name, p.PositionalUnit, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team, {q5ColOrder} FROM dbo.Players p WHERE p.TeamId = @teamid ORDER BY P.{orderby} {ascORdesc}");
                     break;
                 case 6:
                     populateTable($"DECLARE @score INT = {yards} SELECT g.[Week], (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.HomeTeamId) AS HomeTeam, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.AwayTeamId) AS AwayTeam, g.HomeScore, g.AwayScore, g.HomePassingYards, g.HomeRushingYards, g.AwayPassingYards, g.AwayRushingYards FROM dbo.Game g WHERE g.HomeScore > @score OR g.AwayScore > @score");
@@ -78,8 +126,6 @@ namespace NFLDatabaseUi
                     populateTable($"DECLARE @positionunit NVARCHAR(4)= N'{position}' SELECT p.Name, p.Points, p.Touchdowns, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team FROM dbo.Players p WHERE p.PositionalUnit = @positionunit ORDER by p.Points DESC");
                     break;
             }
-            //execute_query(queryId, param1);
-            //display results in dataGridView1
         }
 
         private void populateTable(string query)
@@ -87,11 +133,9 @@ namespace NFLDatabaseUi
             using (SqlConnection sqlCon = new SqlConnection(connectionString))
             {
                 sqlCon.Open();
-                //string query = //dummymethod
                 SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
                 DataTable dtbl = new DataTable();
                 sqlDa.Fill(dtbl);
-                //MessageBox.Show("connected");
                 dataGridView1.DataSource = dtbl;
                 sqlCon.Close();
             }
@@ -156,6 +200,9 @@ namespace NFLDatabaseUi
                 textBoxYards.Visible = false;
                 label1.Visible = false;
             }
+
+            if (queryId == 5){ComboBoxOrder.Visible = true;}
+            else { ComboBoxOrder.Visible = false; }
         }
 
         private void param1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
