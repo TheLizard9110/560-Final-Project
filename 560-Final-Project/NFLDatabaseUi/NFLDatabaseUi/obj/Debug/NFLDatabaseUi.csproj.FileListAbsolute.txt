@@ -27,3 +27,14 @@ C:\Users\danna\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NF
 C:\Users\danna\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.csproj.CoreCompileInputs.cache
 C:\Users\danna\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.exe
 C:\Users\danna\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.pdb
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\bin\Debug\NFLDatabaseUi.exe.config
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\bin\Debug\NFLDatabaseUi.exe
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\bin\Debug\NFLDatabaseUi.pdb
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.csprojAssemblyReference.cache
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.Form1.resources
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.ModifyForm.resources
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.Properties.Resources.resources
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.csproj.GenerateResource.cache
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.csproj.CoreCompileInputs.cache
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.exe
+C:\Users\Trent Gierhart\source\repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.pdb
