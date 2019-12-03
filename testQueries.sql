@@ -1,7 +1,6 @@
 
-DROP SCHEMA NFLDB IF EXISTS;
-CREATE SCHEMA NFLDB;
---needs to replace dbo by NFLDB
+--DROP SCHEMA dbo IF EXISTS;
+--CREATE SCHEMA dbo;
 --REPORT QUERIES
 
 	--List all players with over 500 rushing yards
@@ -14,30 +13,47 @@ CREATE SCHEMA NFLDB;
 	ORDER BY p.RushingYards DESC
 
 	--lists players and coach and frontoffice members by one team
-	DECLARE @team INT = 1;
-	SELECT p.[Name] AS Players, p.PositionalUnit, c.[Name] AS Coach, f.[Name] AS Owner
+	DECLARE @team INT = 22;
+
+	WITH GmName(TeamId, GMName) AS(
+	SELECT t.TeamId, f.[Name]
+	FROM dbo.Team t
+	INNER JOIN dbo.FrontOffice f ON t.TeamId = f.TeamId
+	WHERE f.Job = 'GM' OR f.Job = 'Owner/GM'
+	),
+	OwnerName(TeamId, OwnerName) AS(
+	SELECT t.TeamId,f.[Name]
+	FROM dbo.Team t
+	INNER JOIN dbo.FrontOffice f ON t.TeamId = f.TeamId
+	WHERE f.Job = 'Owner' OR f.Job = 'Owner/GM')
+	SELECT p.[Name] AS Players, p.PositionalUnit, c.[Name] AS Coach, gm.[GMName] AS GM, o.OwnerName AS Owner
 	FROM dbo.Team t
 		INNER JOIN dbo.Players p ON p.TeamId = t.TeamId 
 		INNER JOIN dbo.Coach c ON t.TeamId = c.TeamId
-		INNER JOIN dbo.FrontOffice f ON t.TeamId = f.TeamId
-	WHERE t.TeamId = @team AND f.Job = 'Owner'
-	SELECT f.[Name] AS GM
+		INNER JOIN GmName gm ON t.TeamId = gm.TeamId
+		INNER JOIN OwnerName o ON t.TeamId = o.TeamId
+	WHERE t.TeamId = @team
+
+
+	--ranks teams by points
+	WITH HomePointsCte(TeamId, TotalPoints) AS (
+	SELECT t.TeamId, SUM(g.HomeScore) AS TotalPoints
 	FROM dbo.Team t
-		INNER JOIN dbo.FrontOffice f ON f.TeamId = t.TeamId
-	WHERE t.TeamId = @team AND f.Job = 'GM'
-
-
-	--COUNTING WINS IS AN ISSUE AND CALCULATING TOTAL POINTS IS INACCURATE
-	--ranks teams by wins then points UNFINISHED
-	--SELECT --RANK() OVER (ORDER BY COUNT(g.AwayScore AS [Rank],
-	--t.Name, SUM(p.Points) AS Points
-	--FROM dbo.Team t
-	--	INNER JOIN dbo.Players p ON p.TeamId = t.TeamId
-		--INNER JOIN dbo.Game g ON g.AwayTeamId = t.TeamId AND g.HomeTeamId = t.TeamId
---		WHERE 
-	--GROUP BY t.Name
-	--ORDER BY SUM(p.Points) DESC
-
+		INNER JOIN dbo.Game g ON t.TeamId = g.HomeTeamId
+	GROUP BY t.TeamId
+),
+AwayPointsCte(TeamId, TotalPoints) AS (
+	SELECT t.TeamId, SUM(g.AwayScore) AS TotalPoints
+	FROM dbo.Team t
+		INNER JOIN dbo.Game g ON t.TeamId = g.AwayTeamId
+	GROUP BY t.TeamId
+)
+SELECT RANK() OVER (ORDER BY (h.TotalPoints + a.TotalPoints) DESC) AS [Rank],
+	t.[Name], (h.TotalPoints + a.TotalPoints) AS TotalPointsScored
+	FROM dbo.Team t
+		INNER JOIN HomePointsCte h ON t.TeamId = h.TeamId
+		INNER JOIN AwayPointsCte a ON t.TeamId = a.TeamId
+	ORDER BY TotalPointsScored DESC
 
 
 	--lists coaches by exeprience
@@ -48,28 +64,40 @@ CREATE SCHEMA NFLDB;
 
 
 	--Q Queries
-	--touchdowns over 15 that are not QBs
+	--touchdowns over a variable that are a certain position or just by touchdowns
+	DECLARE @touchdown INT = 15
+	DECLARE @position INT = 'QB'
 	SELECT * FROM dbo.Players p
-	WHERE p.Touchdowns > 15 AND p.PositionalUnit != 'QB'
-	--Chiefs players
+	WHERE p.Touchdowns > @touchdown AND p.PositionalUnit = @position
+	
 	SELECT * FROM dbo.Players p
-	WHERE p.TeamId = 16
+	WHERE p.Touchdowns > @touchdown
+	--a teams players
+	DECLARE @teamid INT = 21
+	SELECT * FROM dbo.Players p
+	WHERE p.TeamId = @teamid
 	--Games where either home or away scored over 40 points
+	DECLARE @score INT = 40
 	SELECT * FROM dbo.Game g
-	WHERE g.HomeScore > 40 OR g.AwayScore > 40
-	--All chiefs games
+	WHERE g.HomeScore > @score OR g.AwayScore > @score
+	--All of ones teams games
+	DECLARE @teamid INT = 23
 	SELECT * FROM dbo.Game g
-	WHERE g.AwayTeamId = 16 OR g.HomeTeamId = 16
-	--Games where home team rushed for over 200 yards
+	WHERE g.AwayTeamId = @teamid OR g.HomeTeamId = @teamid
+	--Games where home team rushed for over a certain amount of yards
+	DECLARE @rushingyards = 200
 	SELECT * FROM dbo.Game g 
-	WHERE g.HomeRushingYards > 200
-	--returns all owner/gms of a team
+	WHERE g.HomeRushingYards > @rushingyards
+	--returns all owner/gm or owner or gm of a team
+	DECLARE @job NVARCHAR(16) = 'Owner/GM'
 	SELECT f.Name FROM dbo.FrontOffice f
-	WHERE f.Job = 'Owner/GM'
-	--returns coaches with less than 2 years of head coaching expereince
+	WHERE f.Job = @job
+	--returns coaches with less than a years years of head coaching expereince
+	DECLARE @expYears INT = 3
 	SELECT * FROM dbo.Coach c
-	WHERE c.Experience < 2
-	--returns all DBs by interceptions
-	SELECT * FROM dbo.Players p
-	WHERE p.PositionalUnit = 'S' OR p.PositionalUnit = 'CB'
-	ORDER by p.Interceptions DESC
+	WHERE c.Experience < @expYears
+	--returns all of a positional unit by a points
+	DECLARE @positionunit NVARCHAR(4)= 'WR'
+	SELECT p.Name, p.Touchdowns, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team FROM dbo.Players p
+	WHERE p.PositionalUnit = @positionunit
+	ORDER by p.Points DESC
