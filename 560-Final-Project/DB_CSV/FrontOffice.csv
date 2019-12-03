@@ -1,0 +1,63 @@
+TeamId,MemberId,Name,Job
+1,1,Estate of Bill Bidwell,Owner
+2,2,Arthur Blank,Owner
+3,3,Steve Biscotti,Owner
+4,4,Kim and Terry Pegula,Owner
+5,5,David Tepper,Owner
+6,6,Virginia Halas McCaskey,Owner
+7,7,Mike Brown,Owner/GM
+8,8,Jimmy and Dee Haslam,Owner
+9,9,Jerry Jones,Owner/GM
+10,10,Estate of Pat Bowlen,Owner
+11,11,Martha Ford,Owner
+12,12,"Green Bay Packers, Inc.",Owner
+13,13,Janice McNair and family,Owner
+14,14,Jim Irsay,Owner
+15,15,Shahid Khan,Owner
+16,16,Clark Hunt and siblings,Owner
+17,17,Dean Spanos,Owner
+18,18,Stan Kroenke,Owner
+19,19,Stephen M. Ross,Owner
+20,20,Zygi Wilf,Owner
+21,21,Robert Kraft,Owner
+22,22,Gayle Benson,Owner
+23,23,John Mara and Steve Tisch,Owner
+24,24,Robert Wood Johnson IV and Christopher Wold Johnson,Owner
+25,25,Carol and Mark Davis,Owner
+26,26,Jeffery Lurie and Chrsitina Weiss Lurie,Owner
+27,27,Art Rooney II and family,Owner
+28,28,Denise DeBartolo York and Jed York,Owner
+29,29,Jody Allen,Owner
+30,30,Brian Glazer and siblings,Owner
+31,31,Amy Adams Strunk,Owner
+32,32,Dan Snyder,Owner
+1,33,Steve Keim,GM
+2,34,Thomas Dimitroff,GM
+3,35,Ozzie Newsome,GM
+4,36,Brandon Beane,GM
+5,37,Marty Hurney,GM
+6,38,Ryan Pace,GM
+8,39,John Dorsey,GM
+10,40,John Elway,GM
+11,41,Bob Quinn,GM
+12,42,Brian Gutekunst,GM
+13,43,Brian Gaine,GM
+14,44,Chris Ballard,GM
+15,45,David Caldwell,GM
+16,46,Brett Veach,GM
+17,47,Tom Telesco,GM
+18,48,Les Snead,GM
+19,49,Chris Grier,GM
+20,50,Rick Spielman,GM
+21,51,Bill Belichick,GM
+22,52,Mickey Loomis,GM
+23,53,Dave Gettlemen,GM
+24,54,Joe Douglas,GM
+25,55,Mike Mayock,GM
+26,56,Howie Roseman,GM
+27,57,Kevin Colbert,GM
+28,58,John Lynch,GM
+29,59,John Schneider,GM
+30,60,Jason Licht,GM
+31,61,Jon Robinson,GM
+32,62,Bruce Allen,GM
