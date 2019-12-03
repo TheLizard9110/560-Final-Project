@@ -16,6 +16,7 @@ namespace NFLDatabaseUi
 
         string connectionString = @"Data Source=mssql.cs.ksu.edu; Initial Catalog = denavarro6;User ID=denavarro6;Password=Navarro1;";
         string newValue;
+        string columnName;
 
         public ModifyForm()
         {
@@ -26,13 +27,15 @@ namespace NFLDatabaseUi
         {
             if (comboBoxTable.SelectedIndex == 2)
             {
+                columnName = "GameId";
                 populateComboBox($"SELECT t.GameId FROM dbo.Game t", comboBoxName);
-                comboBoxName.Text = "Select a Game ID";
+                //comboBoxName.Text = "Select a Game ID";
             }
             else
             {
+                columnName = "Name";
                 populateComboBox($"SELECT t.[Name] FROM dbo.{comboBoxTable.SelectedItem.ToString()} t", comboBoxName);
-                comboBoxName.Text = $"Select a {comboBoxTable.SelectedItem.ToString()} name";
+                //comboBoxName.Text = $"Select a {comboBoxTable.SelectedItem.ToString()} name";
             }
             //comboBoxField.Items.RemoveAt(0);
             comboBoxName.Visible = true;
@@ -40,13 +43,23 @@ namespace NFLDatabaseUi
 
         private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            populateComboBox($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{comboBoxName.SelectedItem.ToString()}'", comboBoxField);
+            columnName = "COLUMN_NAME";
+            populateComboBox($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{comboBoxTable.SelectedItem.ToString()}'", comboBoxField);
             //comboBoxField.Items.RemoveAt(0);
             comboBoxField.Visible = true;
         }
 
         private void comboBoxField_SelectedIndexChanged(object sender, EventArgs e)
         {
+            columnName = comboBoxField.SelectedItem.ToString();
+            if (comboBoxTable.SelectedIndex == 2)
+            {
+                populateCurrentValue($"SELECT {comboBoxField.SelectedItem.ToString()} FROM dbo.Game WHERE GameId = {comboBoxName.SelectedItem.ToString()}");
+            }
+            else
+            {
+                populateCurrentValue($"SELECT {comboBoxField.SelectedItem.ToString()} FROM dbo.{comboBoxTable.SelectedItem.ToString()} WHERE [Name] = N'{comboBoxName.SelectedItem.ToString()}'");
+            }
             textBoxNewValue.Visible = true;
             labelNewValue.Visible = true;
         }
@@ -93,11 +106,37 @@ namespace NFLDatabaseUi
             {
                 sqlCon.Open();
                 //string query = //dummymethod
-                SqlDataAdapter sqlDa1 = new SqlDataAdapter(query, sqlCon);
-                DataTable dtbl1 = new DataTable();
-                sqlDa1.Fill(dtbl1);
+                SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
                 //MessageBox.Show("connected");
-                comboBox.DataSource = dtbl1;
+                List<string> list = new List<string>();
+                foreach (DataRow row in dtbl.Rows)
+                {
+                    list.Add(row[columnName].ToString());
+                }
+                comboBox.DataSource = list;
+                sqlCon.Close();
+            }
+        }
+
+        private void populateCurrentValue(string query)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                //string query = //dummymethod
+                SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
+                //MessageBox.Show("connected");
+                List<string> list = new List<string>();
+                foreach (DataRow row in dtbl.Rows)
+                {
+                    list.Add(row[columnName].ToString());
+                }
+                labelCurrentVal.Text = "Current Value: " + list[0];
+                labelCurrentVal.Visible = true;
                 sqlCon.Close();
             }
         }
@@ -109,6 +148,8 @@ namespace NFLDatabaseUi
                 sqlCon.Open();
                 //string query = //dummymethod
                 SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
+                DataTable dtbl = new DataTable();
+                sqlDa.Fill(dtbl);
                 //MessageBox.Show("connected");
                 sqlCon.Close();
             }
