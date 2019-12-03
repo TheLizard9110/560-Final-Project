@@ -209,7 +209,7 @@ namespace NFLDatabaseUi
                 case 0:
                     string _TeamName = textBox1.Text;
                     string city = textBox2.Text;
-                    insert = ($"INSERT dbo.Team(TeamId,Name,City)VALUES((SELECT MAX(t.TeamId) FROM dbo.Team t) + 1,{_TeamName},{city})");
+                    insert = ($"INSERT dbo.Team(TeamId,Name,City)VALUES((SELECT MAX(t.TeamId) FROM dbo.Team t) + 1,'{_TeamName}','{city}')");
                     break;
                 case 1:
                     string Name = textBox1.Text;
@@ -237,7 +237,7 @@ namespace NFLDatabaseUi
                         playProBowl = 1;
                     else
                         playProBowl = 0;
-                    insert = ($"INSERT dbo.Players(PlayerId,TeamId, Touchdowns, Tackles, Points, Interceptions, Name, PositionalUnit,PassingYards,RushingYards,RecievingYards,Sacks,PlayedinProBowl)VALUES((SELECT MAX(p.PlayerId) FROM dbo.Players p) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {TeamName} = t.Name),{touchdowns},{tackles},{Points},{Interceptions},{Name},{PositionalUnit},{PassingYards},{RushingYards},{Sacks},{playProBowl})");
+                    insert = ($"INSERT dbo.Players(PlayerId,TeamId, Touchdowns, Tackles, Points, Interceptions, Name, PositionalUnit,PassingYards,RushingYards,RecievingYards,Sacks,PlayedinProBowl)VALUES((SELECT MAX(p.PlayerId) FROM dbo.Players p) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {TeamName} = t.Name),{touchdowns},{tackles},{Points},{Interceptions},'{Name}',{PositionalUnit},{PassingYards},{RushingYards},{Sacks},{playProBowl})");
                     break;
                 case 2:
                     string _name = textBox1.Text;
@@ -246,14 +246,14 @@ namespace NFLDatabaseUi
                     if (position != "GM" && position != "Owner" && position != "Owner/GM")
                         MessageBox.Show("Invalid position for front office member.");
                     else
-                        insert = ($"INSERT dbo.FrontOffice(TeamId,MemberId,Name,Job)VALUES((SELECT t.TeamId FROM dbo.Team t WHERE {_TeamName_} = t.Name),(SELECT MAX(f.MemberId) FROM dbo.FrontOffice f) + 1,{_name},{position})");
+                        insert = ($"INSERT dbo.FrontOffice(TeamId,MemberId,Name,Job)VALUES((SELECT t.TeamId FROM dbo.Team t WHERE {_TeamName_} = t.Name),(SELECT MAX(f.MemberId) FROM dbo.FrontOffice f) + 1,'{_name}','{position}')");
 
                     break;
                 case 3:
                     string namer = textBox1.Text;
-                    string teamer = comboBox2.SelectedText;
+                    string teamer = comboBox2.SelectedItem.ToString();
                     int.TryParse(textBox3.Text, out int exp);
-                    insert = ($"INSERT dbo.Coach(CoachId,TeamId,Name,Job,Experience)VALUES((SELECT MAX(c.CoachId) FROM dbo.Coach c) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {teamer} = t.Name),{namer},'HC',{exp})");
+                    insert = ($"INSERT dbo.Coach(CoachId,TeamId,Name,Job,Experience)VALUES((SELECT MAX(c.CoachId) FROM dbo.Coach c) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {teamer} = t.Name),'{namer}','HC','{exp}')");
                     break;
             }
             

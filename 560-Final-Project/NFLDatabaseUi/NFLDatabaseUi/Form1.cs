@@ -230,7 +230,7 @@ namespace NFLDatabaseUi
                     sqlCon.Open();
                     SqlDataAdapter sqlDa = new SqlDataAdapter(insertString, sqlCon);
                     //sqlDa.Fill();
-                    //sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
+                    sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
                     sqlDa.InsertCommand.ExecuteNonQuery();
                     sqlCon.Close();
                 }
