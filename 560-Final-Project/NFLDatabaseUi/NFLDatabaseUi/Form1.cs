@@ -226,8 +226,10 @@ namespace NFLDatabaseUi
             using (SqlConnection sqlCon = new SqlConnection(connectionString))
             {
                 sqlCon.Open();
+                //string query = //dummymethod
                 SqlDataAdapter sqlDa = new SqlDataAdapter(insertString, sqlCon);
-                //sqlDa.Fill();
+                DataTable dtbl = new DataTable();
+                //sqlDa.Fill(dtbl);
                 //sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
                 sqlDa.InsertCommand.ExecuteNonQuery();
                 sqlCon.Close();

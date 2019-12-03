@@ -37,3 +37,4 @@ C:\Users\htryb\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NF
 C:\Users\htryb\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.exe
 C:\Users\htryb\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.pdb
 C:\Users\htryb\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.ModifyForm.resources
+C:\Users\htryb\Source\Repos\560-Final-Project\560-Final-Project\NFLDatabaseUi\NFLDatabaseUi\obj\Debug\NFLDatabaseUi.PopUpForm.resources
