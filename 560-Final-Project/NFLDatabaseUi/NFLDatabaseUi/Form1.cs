@@ -51,31 +51,31 @@ namespace NFLDatabaseUi
                     populateTable("WITH HomePointsCte(TeamId, TotalPoints) AS (SELECT t.TeamId, SUM(g.HomeScore) AS TotalPoints FROM dbo.Team t INNER JOIN dbo.Game g ON t.TeamId = g.HomeTeamId GROUP BY t.TeamId), AwayPointsCte(TeamId, TotalPoints) AS(SELECT t.TeamId, SUM(g.AwayScore) AS TotalPoints FROM dbo.Team t INNER JOIN dbo.Game g ON t.TeamId = g.AwayTeamId GROUP BY t.TeamId) SELECT RANK() OVER(ORDER BY(h.TotalPoints + a.TotalPoints) DESC) AS[Rank], t.[Name], (h.TotalPoints + a.TotalPoints) AS TotalPointsScored FROM dbo.Team t INNER JOIN HomePointsCte h ON t.TeamId = h.TeamId INNER JOIN AwayPointsCte a ON t.TeamId = a.TeamId ORDER BY TotalPointsScored DESC");
                     break;
                 case 3:
-                    populateTable("SELECT c.[Name], RANK() OVER (ORDER BY c.Experience DESC) AS [ExpereinceRank], t.[Name] AS TeamName FROM dbo.Team t INNER JOIN dbo.Coach c ON c.TeamId = t.TeamId ORDER BY c.Experience DESC");
+                    populateTable("SELECT c.[Name], RANK() OVER (ORDER BY c.Experience DESC) AS [ExperienceRank], c.Experience AS ExperienceInYears, t.[Name] AS TeamName FROM dbo.Team t INNER JOIN dbo.Coach c ON c.TeamId = t.TeamId ORDER BY c.Experience DESC");
                     break;
                 case 4:
-                    populateTable($"DECLARE @touchdown INT = {yards} DECLARE @position NVARCHAR(4) = N'{position}' SELECT * FROM dbo.Players p WHERE p.Touchdowns > @touchdown AND p.PositionalUnit = @position SELECT * FROM dbo.Players p WHERE p.Touchdowns > @touchdown");
+                    populateTable($"DECLARE @touchdown INT = {yards} DECLARE @position NVARCHAR(4) = N'{position}' SELECT p.Name, p.PositionalUnit, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl FROM dbo.Players p WHERE p.Touchdowns > @touchdown AND p.PositionalUnit = @position");// this is an alternate query SELECT * FROM dbo.Players p WHERE p.Touchdowns > @touchdown");
                     break;
                 case 5:
-                    populateTable($"DECLARE @teamid INT = {teamid} SELECT * FROM dbo.Players p WHERE p.TeamId = @teamid");
+                    populateTable($"DECLARE @teamid INT = {teamid} SELECT p.Name, p.PositionalUnit, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team, p.Touchdowns, p.Tackles, p.Interceptions, p.Passingyards, p.RushingYards, p.RecievingYards, p.Sacks, p.PlayedInProBowl FROM dbo.Players p WHERE p.TeamId = @teamid");
                     break;
                 case 6:
-                    populateTable($"DECLARE @score INT = {yards} SELECT * FROM dbo.Game g WHERE g.HomeScore > @score OR g.AwayScore > @score");
+                    populateTable($"DECLARE @score INT = {yards} SELECT g.[Week], (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.HomeTeamId) AS HomeTeam, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.AwayTeamId) AS AwayTeam, g.HomeScore, g.AwayScore, g.HomePassingYards, g.HomeRushingYards, g.AwayPassingYards, g.AwayRushingYards FROM dbo.Game g WHERE g.HomeScore > @score OR g.AwayScore > @score");
                     break;
                 case 7:
-                    populateTable($"DECLARE @teamid INT = {teamid} SELECT * FROM dbo.Game g WHERE g.AwayTeamId = @teamid OR g.HomeTeamId = @teamid");
+                    populateTable($"DECLARE @teamid INT = {teamid} SELECT g.[Week], (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.HomeTeamId) AS HomeTeam, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.AwayTeamId) AS AwayTeam, g.HomeScore, g.AwayScore, g.HomePassingYards, g.HomeRushingYards, g.AwayPassingYards, g.AwayRushingYards FROM dbo.Game g WHERE g.AwayTeamId = @teamid OR g.HomeTeamId = @teamid");
                     break;
                 case 8:
-                    populateTable($"DECLARE @rushingyards INT = {yards} SELECT * FROM dbo.Game g WHERE g.HomeRushingYards > @rushingyards");
+                    populateTable($"DECLARE @rushingyards INT = {yards} SELECT g.[Week], (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.HomeTeamId) AS HomeTeam, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = g.AwayTeamId) AS AwayTeam, g.HomeScore, g.AwayScore, g.HomePassingYards, g.HomeRushingYards, g.AwayPassingYards, g.AwayRushingYards FROM dbo.Game g WHERE g.HomeRushingYards > @rushingyards");
                     break;
                 case 9:
-                    populateTable("DECLARE @job NVARCHAR(16) = 'Owner/GM' SELECT f.Name FROM dbo.FrontOffice f WHERE f.Job = @job");
+                    populateTable("DECLARE @job NVARCHAR(16) = 'Owner/GM' SELECT f.Name, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = f.TeamId) AS Team FROM dbo.FrontOffice f WHERE f.Job = @job");
                     break;
                 case 10:
-                    populateTable($"DECLARE @expYears INT = {yards} SELECT * FROM dbo.Coach c WHERE c.Experience < @expYears");
+                    populateTable($"DECLARE @expYears INT = {yards} SELECT c.Name,(SELECT t.Name FROM dbo.Team t WHERE t.TeamId = c.TeamId) AS Team,c.Job,c.Experience AS ExperienceInYears FROM dbo.Coach c WHERE c.Experience < @expYears");
                     break;
                 case 11:
-                    populateTable($"DECLARE @positionunit NVARCHAR(4)= N'{position}' SELECT p.Name, p.Touchdowns, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team FROM dbo.Players p WHERE p.PositionalUnit = @positionunit ORDER by p.Points DESC");
+                    populateTable($"DECLARE @positionunit NVARCHAR(4)= N'{position}' SELECT p.Name, p.Points, p.Touchdowns, (SELECT t.Name FROM dbo.Team t WHERE t.TeamId = p.TeamId) AS Team FROM dbo.Players p WHERE p.PositionalUnit = @positionunit ORDER by p.Points DESC");
                     break;
             }
             //execute_query(queryId, param1);
