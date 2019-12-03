@@ -35,6 +35,7 @@
             this.textBoxYards = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ComboBoxOrder = new System.Windows.Forms.ComboBox();
+            this.buttonModify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@
             "All Players on a given Team",
             "All Games in which a Team scored over a given number of points",
             "All Games of a given Team",
-            "All Games in which the Home Team rushed over a given numebr of yards",
+            "All Games in which the Home Team rushed over a given number of yards",
             "All Owners who are also GMs",
             "All Coaches with less than a given amount of Experience",
             "All players of a position, ranked by points scored"});
@@ -135,11 +136,23 @@
             this.ComboBoxOrder.Text = "Order By";
             this.ComboBoxOrder.Visible = false;
             // 
+            // buttonModify
+            // 
+            this.buttonModify.Location = new System.Drawing.Point(1214, 158);
+            this.buttonModify.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonModify.Name = "buttonModify";
+            this.buttonModify.Size = new System.Drawing.Size(226, 70);
+            this.buttonModify.TabIndex = 8;
+            this.buttonModify.Text = "Modify Information";
+            this.buttonModify.UseVisualStyleBackColor = true;
+            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1572, 855);
+            this.Controls.Add(this.buttonModify);
             this.Controls.Add(this.ComboBoxOrder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxYards);
@@ -165,6 +178,7 @@
         private System.Windows.Forms.TextBox textBoxYards;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ComboBoxOrder;
+        private System.Windows.Forms.Button buttonModify;
     }
 }
 

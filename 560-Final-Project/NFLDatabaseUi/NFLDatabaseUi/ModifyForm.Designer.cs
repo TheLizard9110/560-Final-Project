@@ -39,9 +39,10 @@
             // ButtonModify
             // 
             this.ButtonModify.Enabled = false;
-            this.ButtonModify.Location = new System.Drawing.Point(87, 339);
+            this.ButtonModify.Location = new System.Drawing.Point(130, 530);
+            this.ButtonModify.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ButtonModify.Name = "ButtonModify";
-            this.ButtonModify.Size = new System.Drawing.Size(151, 62);
+            this.ButtonModify.Size = new System.Drawing.Size(226, 97);
             this.ButtonModify.TabIndex = 0;
             this.ButtonModify.Text = "Modify";
             this.ButtonModify.UseVisualStyleBackColor = true;
@@ -52,13 +53,14 @@
             this.comboBoxTable.FormattingEnabled = true;
             this.comboBoxTable.Items.AddRange(new object[] {
             "Team",
-            "Player",
+            "Players",
             "Game",
             "Coach",
-            "FrontOfficeMember"});
-            this.comboBoxTable.Location = new System.Drawing.Point(52, 13);
+            "FrontOffice"});
+            this.comboBoxTable.Location = new System.Drawing.Point(78, 20);
+            this.comboBoxTable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxTable.Name = "comboBoxTable";
-            this.comboBoxTable.Size = new System.Drawing.Size(220, 24);
+            this.comboBoxTable.Size = new System.Drawing.Size(328, 33);
             this.comboBoxTable.TabIndex = 1;
             this.comboBoxTable.Text = "Choose a Table";
             this.comboBoxTable.SelectedIndexChanged += new System.EventHandler(this.comboBoxTable_SelectedIndexChanged);
@@ -66,9 +68,10 @@
             // comboBoxName
             // 
             this.comboBoxName.FormattingEnabled = true;
-            this.comboBoxName.Location = new System.Drawing.Point(52, 70);
+            this.comboBoxName.Location = new System.Drawing.Point(78, 109);
+            this.comboBoxName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxName.Name = "comboBoxName";
-            this.comboBoxName.Size = new System.Drawing.Size(220, 24);
+            this.comboBoxName.Size = new System.Drawing.Size(328, 33);
             this.comboBoxName.TabIndex = 2;
             this.comboBoxName.Text = "Choose a ...";
             this.comboBoxName.Visible = false;
@@ -77,9 +80,10 @@
             // comboBoxField
             // 
             this.comboBoxField.FormattingEnabled = true;
-            this.comboBoxField.Location = new System.Drawing.Point(52, 130);
+            this.comboBoxField.Location = new System.Drawing.Point(78, 203);
+            this.comboBoxField.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxField.Name = "comboBoxField";
-            this.comboBoxField.Size = new System.Drawing.Size(220, 24);
+            this.comboBoxField.Size = new System.Drawing.Size(328, 33);
             this.comboBoxField.TabIndex = 3;
             this.comboBoxField.Text = "Choose a Field";
             this.comboBoxField.Visible = false;
@@ -87,9 +91,10 @@
             // 
             // textBoxNewValue
             // 
-            this.textBoxNewValue.Location = new System.Drawing.Point(52, 293);
+            this.textBoxNewValue.Location = new System.Drawing.Point(78, 458);
+            this.textBoxNewValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxNewValue.Name = "textBoxNewValue";
-            this.textBoxNewValue.Size = new System.Drawing.Size(220, 22);
+            this.textBoxNewValue.Size = new System.Drawing.Size(328, 31);
             this.textBoxNewValue.TabIndex = 4;
             this.textBoxNewValue.Visible = false;
             this.textBoxNewValue.TextChanged += new System.EventHandler(this.textBoxNewValue_TextChanged);
@@ -97,24 +102,26 @@
             // labelNewValue
             // 
             this.labelNewValue.AutoSize = true;
-            this.labelNewValue.Location = new System.Drawing.Point(49, 273);
+            this.labelNewValue.Location = new System.Drawing.Point(74, 427);
+            this.labelNewValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNewValue.Name = "labelNewValue";
-            this.labelNewValue.Size = new System.Drawing.Size(113, 17);
+            this.labelNewValue.Size = new System.Drawing.Size(172, 25);
             this.labelNewValue.TabIndex = 5;
             this.labelNewValue.Text = "Enter New Value";
             this.labelNewValue.Visible = false;
             // 
             // ModifyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 413);
+            this.ClientSize = new System.Drawing.Size(492, 645);
             this.Controls.Add(this.labelNewValue);
             this.Controls.Add(this.textBoxNewValue);
             this.Controls.Add(this.comboBoxField);
             this.Controls.Add(this.comboBoxName);
             this.Controls.Add(this.comboBoxTable);
             this.Controls.Add(this.ButtonModify);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ModifyForm";
             this.Text = "ModifyForm";
             this.ResumeLayout(false);

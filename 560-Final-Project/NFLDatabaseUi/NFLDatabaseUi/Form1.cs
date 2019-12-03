@@ -209,5 +209,12 @@ namespace NFLDatabaseUi
         {
             
         }
+
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+            ModifyForm form = new ModifyForm();
+            form.Show();
+            //this.Hide();
+        }
     }
 }

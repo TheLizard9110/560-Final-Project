@@ -34,14 +34,14 @@ namespace NFLDatabaseUi
                 populateComboBox($"SELECT t.[Name] FROM dbo.{comboBoxTable.SelectedItem.ToString()} t", comboBoxName);
                 comboBoxName.Text = $"Select a {comboBoxTable.SelectedItem.ToString()} name";
             }
-            comboBoxField.Items.RemoveAt(0);
+            //comboBoxField.Items.RemoveAt(0);
             comboBoxName.Visible = true;
         }
 
         private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
         {
             populateComboBox($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{comboBoxName.SelectedItem.ToString()}'", comboBoxField);
-            comboBoxField.Items.RemoveAt(0);
+            //comboBoxField.Items.RemoveAt(0);
             comboBoxField.Visible = true;
         }
 
@@ -93,11 +93,11 @@ namespace NFLDatabaseUi
             {
                 sqlCon.Open();
                 //string query = //dummymethod
-                SqlDataAdapter sqlDa = new SqlDataAdapter(query, sqlCon);
-                DataTable dtbl = new DataTable();
-                sqlDa.Fill(dtbl);
+                SqlDataAdapter sqlDa1 = new SqlDataAdapter(query, sqlCon);
+                DataTable dtbl1 = new DataTable();
+                sqlDa1.Fill(dtbl1);
                 //MessageBox.Show("connected");
-                comboBox.DataSource = dtbl;
+                comboBox.DataSource = dtbl1;
                 sqlCon.Close();
             }
         }
