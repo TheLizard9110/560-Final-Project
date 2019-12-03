@@ -256,6 +256,7 @@ namespace NFLDatabaseUi
                     insert = ($"INSERT dbo.Coach(CoachId,TeamId,Name,Job,Experience)VALUES((SELECT MAX(c.CoachId) FROM dbo.Coach c) + 1,(SELECT t.TeamId FROM dbo.Team t WHERE {teamer} = t.Name),{namer},'HC',{exp})");
                     break;
             }
+            
         }
     }
 }

@@ -140,7 +140,7 @@ namespace NFLDatabaseUi
                 sqlCon.Close();
             }
         }
-    
+
 
 
         private void queryType_SelectedIndexChanged(object sender, EventArgs e)
@@ -201,13 +201,13 @@ namespace NFLDatabaseUi
                 label1.Visible = false;
             }
 
-            if (queryId == 5){ComboBoxOrder.Visible = true;}
+            if (queryId == 5) { ComboBoxOrder.Visible = true; }
             else { ComboBoxOrder.Visible = false; }
         }
 
         private void param1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
@@ -220,17 +220,20 @@ namespace NFLDatabaseUi
         private void buttonInsert_Click(object sender, EventArgs e)
         {
             PopUpForm pForm = new PopUpForm();
-            pForm.Show();
-            string insertString = pForm.insert;
-
-            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            DialogResult result = pForm.ShowDialog(this);
+            if (result == DialogResult.OK)
             {
-                sqlCon.Open();
-                SqlDataAdapter sqlDa = new SqlDataAdapter(insertString, sqlCon);
-                //sqlDa.Fill();
-                //sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
-                sqlDa.InsertCommand.ExecuteNonQuery();
-                sqlCon.Close();
+                string insertString = pForm.insert;
+
+                using (SqlConnection sqlCon = new SqlConnection(connectionString))
+                {
+                    sqlCon.Open();
+                    SqlDataAdapter sqlDa = new SqlDataAdapter(insertString, sqlCon);
+                    //sqlDa.Fill();
+                    //sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
+                    sqlDa.InsertCommand.ExecuteNonQuery();
+                    sqlCon.Close();
+                }
             }
         }
     }
