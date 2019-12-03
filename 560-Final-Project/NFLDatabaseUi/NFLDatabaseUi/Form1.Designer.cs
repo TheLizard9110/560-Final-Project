@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ComboBoxOrder = new System.Windows.Forms.ComboBox();
             this.buttonModify = new System.Windows.Forms.Button();
+            this.buttonInsert = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,12 +89,12 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(18, 341);
+            this.dataGridView1.Location = new System.Drawing.Point(18, 363);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1536, 495);
+            this.dataGridView1.Size = new System.Drawing.Size(1536, 473);
             this.dataGridView1.TabIndex = 3;
             // 
             // textBoxYards
@@ -147,11 +148,23 @@
             this.buttonModify.UseVisualStyleBackColor = true;
             this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
+            // buttonInsert
+            // 
+            this.buttonInsert.Location = new System.Drawing.Point(1214, 252);
+            this.buttonInsert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(226, 70);
+            this.buttonInsert.TabIndex = 9;
+            this.buttonInsert.Text = "Insert Information";
+            this.buttonInsert.UseVisualStyleBackColor = true;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1572, 855);
+            this.Controls.Add(this.buttonInsert);
             this.Controls.Add(this.buttonModify);
             this.Controls.Add(this.ComboBoxOrder);
             this.Controls.Add(this.label1);
@@ -179,6 +192,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ComboBoxOrder;
         private System.Windows.Forms.Button buttonModify;
+        private System.Windows.Forms.Button buttonInsert;
     }
 }
 

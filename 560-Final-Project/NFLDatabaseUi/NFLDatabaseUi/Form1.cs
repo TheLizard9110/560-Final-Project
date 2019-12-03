@@ -216,5 +216,27 @@ namespace NFLDatabaseUi
             form.Show();
             //this.Hide();
         }
+
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            PopUpForm pForm = new PopUpForm();
+            pForm.Show();
+            string insertString = pForm.insert;
+
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                sqlCon.Open();
+                SqlDataAdapter sqlDa = new SqlDataAdapter(insertString, sqlCon);
+                //sqlDa.Fill();
+                //sqlDa.InsertCommand = new SqlCommand(insertString, sqlCon);
+                sqlDa.InsertCommand.ExecuteNonQuery();
+                sqlCon.Close();
+            }
+        }
     }
 }
+
+/*
+ * 
+
+    */
